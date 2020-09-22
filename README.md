@@ -1,4 +1,4 @@
-# Coffee Order Web User Interface <img src="icon-coffee-24.jpg" style="width:10%;height:10%" />
+# Coffee Order Web User Interface <img src="icon-coffee-24-icon.jpg" style="width:10%;height:10%" />
 A very large hammer to crack a very small nut!
 
 ## Background
