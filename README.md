@@ -94,4 +94,4 @@ exit 0
   I suspect that the _Python Flask_ server shuts down threads after a
   period of inactivity, as subsequent API requests (clicks on _Send_ or _Receive_)
   are very fast.
-
+* install this as a service so it does not have to run as _root_
