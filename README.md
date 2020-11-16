@@ -83,6 +83,9 @@ exit 0
 </details>
 <br />
 
+To minimise file corruption, make file system read-only:  
+https://medium.com/swlh/make-your-raspberry-pi-file-system-read-only-raspbian-buster-c558694de79
+
 ## Further work
 * order status is held on a _per session_ basis but this information
   is used to control a **single** output.  This is incorrect and the
