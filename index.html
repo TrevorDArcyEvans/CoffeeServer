@@ -49,15 +49,12 @@
           if (this.readyState == 4 && this.status == 200)
           {
             var status = document.getElementById('status');
-            status.innerText = this.responseText === "None" ? "Now taking orders" : "Order placed: " + this.responseText;
-            clearInterval(updateTimer);
+            status.innerText = this.responseText === "None" ? "Now taking orders" : "Order status: " + this.responseText;
           }
         };
         xhttp.open("GET", route, true);
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send();
-
-        updateTimer = setInterval(UpdatePlacingOrder, 500);
       }
 
       function PlacingOrder()
@@ -68,22 +65,22 @@
 
       function UpdatePlacingOrder()
       {
-        var status = document.getElementById('status');
-        status.innerText += ".";
+        OnButton('/status');
       }
 
       function OnLoad()
       {
-        OnButton('/status');
+        setInterval(UpdatePlacingOrder, 500);
       }
     </script>
   </head>
 
   <body onload="OnLoad()">
     <h1 class="center">Coffee Pi</h1>
-    <h2 class="center border" id="status">Now taking orders...</h2>
+    <h2 class="center border" id="status"></h2>
     <div class="center controls">
       <button type="button" class="fas fa-coffee button" onclick="PlacingOrder();OnButton('/order');"></button>
+      <button type="button" class="fas fa-clock button" onclick="OnButton('/acknowledged');"></button>
       <button type="button" class="fas fa-check button" onclick="OnButton('/received');"></button>
     </div>
   </body>

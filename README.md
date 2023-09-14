@@ -7,12 +7,24 @@ Instead of her calling out for one, or even ringing a bell, what better
 way than to employ one of my Raspberry Pi Zeros 
 (and a tacky, £1.50 plastic palm tree with LED lights)?
 
-The RPi0 serves up a webpage with two buttons:
+The RPi0 serves up a webpage with three buttons:
 * order a coffee
-* acknowledge receipt of coffee
+* acknowledge order [me]
+* acknowledge receival of coffee [wife]
 
 When the _Order_ button is pressed, it lights up the palm tree;
-and the _Receive_ button turns it off - simples!
+_Acknowledge_ button updates order status;
+and the _Receive_ button turns it off and resets the system - simples!
+
+## Prerequisites
+<details>
+
+```bash
+sudo apt install python3-pip
+pip3 install flask
+```
+
+</details>
 
 ## Photos and Screenshots
 <details>
@@ -43,6 +55,12 @@ _[Python Flask](https://en.wikipedia.org/wiki/Flask_\(web_framework\))_ is used 
 and provide RESTful APIs.
 
 The single web page uses _Javascript_ to call various APIs to _order_ and _receive_ a coffee.
+
+The python server tracks order status in a _global_ variable, so that I can acknowledge the order from
+another computer.
+
+The web page regularly polls the python server for the order status, so my wife knows I have received
+the order.
 
 _[Python GPIO](https://pypi.org/project/RPi.GPIO/)_ is used to turn on/off power to the LEDs.
 
