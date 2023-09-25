@@ -90,8 +90,6 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-# prevent wifi going to sleep
-iw wlan0 set power_save off
 
 sudo /home/trevorde/coffeeServer/index.py &
 
@@ -101,18 +99,28 @@ exit 0
 </details>
 <br />
 
-To minimise file corruption, make file system read-only:  
+[optional] Prevent wifi going to sleep
+```bash
+iw wlan0 set power_save off
+```
+* this is persistent across reboots
+* do not do this in `rc.local` as network interface may not be initialised
+
+[optional] To minimise file corruption, make file system read-only:  
 https://medium.com/swlh/make-your-raspberry-pi-file-system-read-only-raspbian-buster-c558694de79
 
+* very difficult to update system
+* `date` (bash script + python) function returns incorrect date+time
+
 ## Further work
-* order status is held on a _per session_ basis but this information
+* ~~order status is held on a _per session_ basis but this information
   is used to control a **single** output.  This is incorrect and the
   order status should be held globally, typically in something like
-  _Redis_.
-* sometimes it takes up to 20s (!) after clicking the _Receive_ button
+  _Redis_.~~
+* ~~sometimes it takes up to 20s (!) after clicking the _Receive_ button
   for the LEDs to turn on.  This is why the web page has a 'progress bar'
   (_UpdatePlacingOrder_) to show that something is happening.
   I suspect that the _Python Flask_ server shuts down threads after a
   period of inactivity, as subsequent API requests (clicks on _Send_ or _Receive_)
-  are very fast.
+  are very fast.~~
 * install this as a service so it does not have to run as _root_
